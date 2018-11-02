@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.css';
+
+import styles from './Task.module.css';
 
 function Task({ task: { id, title, state }, onArchiveTask, onPinTask }) {
   return(
-    <div className={`list-item ${state}`}>
-      <label className="checkbox">
+    <div className={`${styles.listItem} ${state}`}>
+      <label className={styles.checkbox}>
         <input
           type="checkbox"
           defaultChecked={state === 'TASK_ARCHIVED'}
           disabled={true}
           name="checked"
         />
-        <span className="checkbox-custom" onClick={() => onArchiveTask(id)}></span>
+        <span onClick={() => onArchiveTask(id)}></span>
       </label>
-      <div className="title">
+      <div className={styles.title}>
         <input type="text" value={title} readOnly={true} placeholder="Title" />
       </div>
-      <div className="actions" onClick={ e => e.stopPropagation()}>
+      <div className={styles.actions} onClick={ e => e.stopPropagation()}>
         { state != 'TASK_ARCHIVED' && (
           <a onClick={() => onPinTask(id)}>
             <span className="icon-star"></span>
